@@ -5,16 +5,17 @@ REPOSITORY=$1
 TARGET_DIR=$CURRENT_DIR/$2
 WORKING_DIR=$(mktemp -d -t dc-XXXXXXXXXX)
 
-# Pull + Cleanup
+# Pull
 cd $WORKING_DIR
 git init
 git pull $REPOSITORY
 rm -rf /.git
 
-# Return Home + Copy To Target Destination
+# Move To Target Directory
 cd $CURRENT_DIR
 mkdir -p $TARGET_DIR
-cp -Rf $WORKING_DIR/* $TARGET_DIR
+cd $TARGET_DIR
+cp -Rf $WORKING_DIR/* .
 
-# Cleanup '$WORKING_DIR' Directory
+# Cleanup
 rm -rf $WORKING_DIR
