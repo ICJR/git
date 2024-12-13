@@ -8,10 +8,7 @@ WORKING_DIR=$(mktemp -d -t dc-XXXXXXXXXX)
 
 # Pull
 cd $WORKING_DIR
-git init
-git remote add origin $REPOSITORY
-git fetch origin $BRANCH 
-git checkout $BRANCH
+git clone --single-branch --branch $BRANCH $REPOSITORY .
 rm -rf /.git
 
 # Move To Target Directory
