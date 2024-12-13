@@ -1,9 +1,18 @@
 #!/bin/sh
 
-BRANCH=${3:-main}
-CURRENT_DIR=$PWD
+# Check number of arguments
+if [ "$#" -eq 3 ]; then
+    BRANCH=$2  
+    TARGET_DIR=$PWD/$3  
+elif [ "$#" -eq 2 ]; then
+    BRANCH="main" 
+    TARGET_DIR=$PWD/$2 
+else
+    echo "Usage: $0 <repository> [branch] <target_directory>"
+    exit 1
+fi
+
 REPOSITORY=$1
-TARGET_DIR=$CURRENT_DIR/$2
 WORKING_DIR=$(mktemp -d -t dc-XXXXXXXXXX)
 
 # Pull
@@ -12,7 +21,7 @@ git clone --single-branch --branch $BRANCH $REPOSITORY .
 rm -rf /.git
 
 # Move To Target Directory
-cd $CURRENT_DIR
+cd $PWD
 mkdir -p $TARGET_DIR
 cp -Rf $WORKING_DIR/* $TARGET_DIR/
 
