@@ -14,8 +14,7 @@ rm -rf /.git
 # Move To Target Directory
 cd $CURRENT_DIR
 mkdir -p $TARGET_DIR
-cd $TARGET_DIR
-cp -Rf $WORKING_DIR/* .
+cp -Rf $WORKING_DIR/* $TARGET_DIR/
 
 # Cleanup
 rm -rf $WORKING_DIR
