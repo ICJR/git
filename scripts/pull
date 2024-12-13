@@ -15,7 +15,7 @@ fi
 REPOSITORY=$1
 WORKING_DIR=$(mktemp -d -t dc-XXXXXXXXXX)
 
-# Pull
+# Clone
 cd $WORKING_DIR
 git clone --single-branch --branch $BRANCH $REPOSITORY .
 rm -rf /.git
