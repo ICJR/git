@@ -1,5 +1,6 @@
 #!/bin/sh
 
+BRANCH=${3:-main}
 CURRENT_DIR=$PWD
 REPOSITORY=$1
 TARGET_DIR=$CURRENT_DIR/$2
@@ -8,7 +9,9 @@ WORKING_DIR=$(mktemp -d -t dc-XXXXXXXXXX)
 # Pull
 cd $WORKING_DIR
 git init
-git pull $REPOSITORY
+git remote add origin $REPOSITORY
+git fetch origin $BRANCH 
+git checkout $BRANCH
 rm -rf /.git
 
 # Move To Target Directory
